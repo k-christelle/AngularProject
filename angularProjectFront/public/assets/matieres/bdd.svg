@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <rect width="160" height="160" rx="24" fill="#E3F2FD"/>
+  <g fill="none" stroke="#1565C0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="80" cy="44" rx="44" ry="16" fill="#BBDEFB"/>
+    <path d="M36 44v52c0 9 20 16 44 16s44-7 44-16V44"/>
+    <path d="M36 70c0 9 20 16 44 16s44-7 44-16"/>
+    <path d="M36 96c0 9 20 16 44 16s44-7 44-16"/>
+  </g>
+  <text x="80" y="146" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#1565C0">BDD</text>
+</svg>

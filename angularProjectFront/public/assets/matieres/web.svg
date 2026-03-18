@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <rect width="160" height="160" rx="24" fill="#E8F5E9"/>
+  <g fill="none" stroke="#2E7D32" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="80" cy="72" r="44" fill="#C8E6C9"/>
+    <path d="M36 72h88"/>
+    <path d="M80 28c18 18 18 98 0 116"/>
+    <path d="M80 28c-18 18-18 98 0 116"/>
+  </g>
+  <text x="80" y="146" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#2E7D32">WEB</text>
+</svg>

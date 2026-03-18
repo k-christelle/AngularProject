@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <rect width="160" height="160" rx="24" fill="#FFF3E0"/>
+  <g fill="none" stroke="#EF6C00" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M56 44h48"/>
+    <path d="M60 44l10 62c2 10 18 10 20 0l10-62"/>
+    <path d="M54 58h52"/>
+    <path d="M64 120h32"/>
+  </g>
+  <text x="80" y="146" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#EF6C00">Grails</text>
+</svg>

@@ -1,0 +1,36 @@
+.sidenav-container {
+    height: 100vh;
+  }
+
+  .sidenav {
+    width: 200px;
+    background-color: #ffdcdc;
+  }
+
+  .sidenav mat-nav-list a {
+    display: flex;
+    align-items: center;
+  }
+
+  .sidenav mat-nav-list a mat-icon {
+    margin-right: 10px;
+  }
+
+  .sidenav mat-nav-list a.active {
+    background-color: #e0e0e0;
+    font-weight: bold;
+  }
+
+  .content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .toggle-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+  }

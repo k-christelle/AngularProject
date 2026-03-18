@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <rect width="160" height="160" rx="24" fill="#FFF3E0"/>
+  <circle cx="80" cy="64" r="28" fill="#EF6C00" opacity="0.15"/>
+  <circle cx="80" cy="60" r="18" fill="#EF6C00"/>
+  <path d="M40 132c6-26 28-40 40-40s34 14 40 40" fill="#EF6C00" opacity="0.25"/>
+  <text x="80" y="148" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#EF6C00">Prof Grails</text>
+</svg>
