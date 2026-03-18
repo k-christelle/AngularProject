@@ -38,12 +38,12 @@ Ce projet est une application web développée avec **Angular** (frontend) et **
 ---
 ## Prérequis
 Pour exécuter cette application sur votre machine, vous devez avoir les outils suivants installés :
-- **Node.js** (version 18 ou supérieure) : [Télécharger](https://nodejs.org/)
-- **Angular CLI** (version 17 ou supérieure) : Installez-le globalement avec :
+- **Node.js** (version 24 ou supérieure) : [Télécharger](https://nodejs.org/)
+- **Angular CLI** (version 21 ou supérieure) : Installez-le globalement avec :
   ```bash
   npm install -g @angular/cli
   ```
-- **MongoDB** (version 4.4 ou supérieure) : [Télécharger](https://www.mongodb.com/try/download/community)
+- **MongoDB Atlas** (version 8.0.20 ou supérieure) : [Télécharger](https://www.mongodb.com/try/download/community)
 
 ---
 ## Installation et Exécution
