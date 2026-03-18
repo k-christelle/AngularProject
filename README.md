@@ -49,7 +49,7 @@ Pour exécuter cette application sur votre machine, vous devez avoir les outils 
 ## Installation et Exécution
 ### 1. Cloner le Répertoire
 ```bash
-git clone https://github.com/LEVI-DEVIA/AngularProject.git
+git clone https://github.com/k-christelle/AngularProject.git
 cd AngularProject
 ```
 
