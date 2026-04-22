@@ -425,6 +425,28 @@ export class EditAssignmentDialog {
 
       <!-- Tableau des assignments -->
       <div class="table-section">
+        <!-- Barre de recherche et filtre d'état -->
+        <div class="search-section">
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Rechercher des assignments</mat-label>
+            <input matInput [ngModel]="searchTerm()" (ngModelChange)="onSearchChange($event)" placeholder="Titre, description, auteur, prof, matière...">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="status-filter-field">
+            <mat-label>État</mat-label>
+            <mat-select [ngModel]="statusFilter()" (ngModelChange)="onStatusChange($event)">
+              <mat-option value="all">Tous</mat-option>
+              <mat-option value="rendu">Rendu</mat-option>
+              <mat-option value="non-rendu">Non rendu</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-stroked-button color="primary" type="button" class="reset-filters-button" (click)="resetFilters()">
+            Réinitialiser
+          </button>
+        </div>
+
         <table mat-table [dataSource]="pagedAssignments()" class="mat-elevation-z8 assignments-table">
           <ng-container matColumnDef="matiere">
             <th mat-header-cell *matHeaderCellDef>Matière</th>
@@ -507,7 +529,7 @@ export class EditAssignmentDialog {
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
         <mat-paginator
-          [length]="assignments().length"
+          [length]="filteredAssignments().length"
           [pageIndex]="pageIndex()"
           [pageSize]="pageSize()"
           [pageSizeOptions]="pageSizeOptions"
@@ -672,6 +694,33 @@ export class EditAssignmentDialog {
   box-shadow: 0 4px 15px rgba(63, 81, 181, 0.3);
   border: none;
   min-width: 200px;
+}
+
+/* Search Section */
+.search-section {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.search-field,
+.status-filter-field {
+  width: 100%;
+  max-width: 420px;
+}
+
+.search-field mat-form-field,
+.status-filter-field mat-form-field {
+  width: 100%;
+}
+
+.reset-filters-button {
+  height: 56px;
+  align-self: flex-end;
+  min-width: 150px;
 }
 
 table {
@@ -843,11 +892,31 @@ export class AssignmentsComponent implements OnInit {
   pageIndex = signal(0);
   pageSize = signal(10);
   pageSizeOptions = [5, 10, 25];
+  searchTerm = signal('');
+  statusFilter = signal<'all' | 'rendu' | 'non-rendu'>('all');
   displayedColumns: string[] = ['matiere', 'titre', 'auteur', 'assignedTo', 'prof', 'note', 'dateDeCreation', 'dateDeRendu', 'rendu', 'actions'];
   matieres = MATIERES;
 
+  filteredAssignments = computed(() => {
+    const term = this.searchTerm().toLowerCase();
+    return this.assignments().filter(assignment => {
+      const matchesTerm = !term ||
+        assignment.titre.toLowerCase().includes(term) ||
+        assignment.description.toLowerCase().includes(term) ||
+        assignment.auteurNom.toLowerCase().includes(term) ||
+        assignment.profNom.toLowerCase().includes(term) ||
+        assignment.matiereLabel.toLowerCase().includes(term);
+
+      const status = this.statusFilter();
+      const matchesStatus = status === 'all' ||
+        (status === 'rendu' ? assignment.rendu : !assignment.rendu);
+
+      return matchesTerm && matchesStatus;
+    });
+  });
+
   pagedAssignments = computed(() => {
-    const all = this.assignments();
+    const all = this.filteredAssignments();
     const start = this.pageIndex() * this.pageSize();
     const end = start + this.pageSize();
     return all.slice(start, end);
@@ -911,6 +980,22 @@ export class AssignmentsComponent implements OnInit {
       ...value,
       assignedTo: nom
     }));
+  }
+
+  onSearchChange(term: string): void {
+    this.searchTerm.set(term);
+    this.pageIndex.set(0); // Reset to first page when searching
+  }
+
+  onStatusChange(status: 'all' | 'rendu' | 'non-rendu'): void {
+    this.statusFilter.set(status);
+    this.pageIndex.set(0);
+  }
+
+  resetFilters(): void {
+    this.searchTerm.set('');
+    this.statusFilter.set('all');
+    this.pageIndex.set(0);
   }
 
   nextCreateStep(): void {
