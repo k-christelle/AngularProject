@@ -19,8 +19,8 @@ import { MATIERES, MatiereKey, getMatiereConfig } from '../shared/matieres';
 import { bdInitialAssignments } from '../shared/data';
 import { firstValueFrom } from 'rxjs';
 
-const API_BASE_URL = 'http://localhost:8010/api';
-
+// const API_BASE_URL = 'http://localhost:8010/api';
+const API_BASE_URL = 'https://angularproject-1-p3wp.onrender.com/api';
 // Assignment interface for type safety
 interface Assignment {
   _id: string;

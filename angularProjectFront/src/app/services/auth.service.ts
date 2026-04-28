@@ -7,7 +7,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8010/api';
+  // private apiUrl = 'http://localhost:8010/api';
+  private apiUrl = 'https://angularproject-1-p3wp.onrender.com/api' ;
   private currentUserSignal: WritableSignal<any | null> = signal(this.loadUserFromStorage());
 
   readonly currentUser = computed(() => this.currentUserSignal());
