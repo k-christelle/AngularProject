@@ -69,6 +69,35 @@ const assignmentSchema = new mongoose.Schema({
 
 const Assignment = mongoose.model('Assignment', assignmentSchema, 'Assignments');
 
+// Routes de diagnostic (à placer au tout début)
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Backend Angular Project est opérationnel !',
+    status: 'OK',
+    routes: [
+      '/api/login (POST)',
+      '/api/signup (POST)',
+      '/api/assignments (GET, POST, DELETE)',
+      '/api/assignments/:id (PUT, DELETE)',
+      '/api/users (GET)'
+    ],
+    mongodb: mongoose.connection.readyState === 1 ? 'Connecté' : 'Déconnecté'
+  });
+});
+
+app.get('/api', (req, res) => {
+  res.json({ 
+    message: 'API Backend Assignment App',
+    version: '1.0.0',
+    endpoints: {
+      auth: ['POST /api/login', 'POST /api/signup'],
+      assignments: ['GET /api/assignments', 'POST /api/assignments', 'DELETE /api/assignments'],
+      assignment: ['GET /api/assignments/:id', 'PUT /api/assignments/:id', 'DELETE /api/assignments/:id'],
+      users: ['GET /api/users']
+    }
+  });
+});
+
 // Endpoint pour la connexion
 app.post('/api/login', async (req, res) => {
   const { nom, password } = req.body;
@@ -308,28 +337,6 @@ app.put('/api/assignments/:id', async (req, res) => {
   }
 });
 
-// Endpoint pour supprimer un assignment
-app.delete('/api/assignments/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const assignment = await Assignment.findById(id);
-    if (!assignment) {
-      return res.status(404).json({ success: false, message: 'Assignment non trouvé' });
-    }
-
-    // Vérifier si l'utilisateur est un admin (par exemple, "LineoL")
-    if (assignment.createdBy !== 'LineoL') {
-      return res.status(403).json({ success: false, message: 'Seul l\'administrateur peut supprimer un assignment' });
-    }
-
-    await Assignment.findByIdAndDelete(id);
-    console.log(`Assignment avec ID ${id} supprimé avec succès`);
-    res.json({ success: true, message: 'Assignment supprimé avec succès' });
-  } catch (error) {
-    console.error('Erreur lors de la suppression de l\'assignment:', error);
-    res.status(500).json({ success: false, message: 'Erreur serveur' });
-  }
-});
 
 const PORT = process.env.PORT || 8010;
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
